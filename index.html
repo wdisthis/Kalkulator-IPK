@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kalkulator IPK Kumulatif</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="wrap">
+  <h1>Kalkulator IPK Kumulatif</h1>
+  <p class="subtitle">Masukkan IPK dan total SKS yang sudah ditempuh, lalu tambahkan nilai mata kuliah baru. IPS semester ini dan IPK kumulatif terbaru langsung terlihat.</p>
+
+  <div class="card">
+    <h2>Data Akademik Saat Ini</h2>
+    <div class="row">
+      <div class="field">
+        <label for="ipkAwal">IPK saat ini</label>
+        <input type="number" id="ipkAwal" step="0.01" min="0" max="4">
+      </div>
+      <div class="field">
+        <label for="sksAwal">Total SKS sudah ditempuh</label>
+        <input type="number" id="sksAwal" step="1" min="0">
+      </div>
+    </div>
+    <p class="hint">Total bobot (mutu) yang dihitung dari data ini: <strong id="bobotAwalText">0</strong></p>
+  </div>
+
+  <div class="card">
+    <h2>Tambah Mata Kuliah Baru (Semester Ini)</h2>
+    <div class="add-row">
+      <div class="field name">
+        <label for="matkulNama">Nama mata kuliah</label>
+        <input type="text" id="matkulNama">
+      </div>
+      <div class="field">
+        <label for="matkulSks">SKS</label>
+        <input type="number" id="matkulSks" step="1" min="1">
+      </div>
+      <div class="field">
+        <label for="matkulNilai">Nilai huruf</label>
+        <select id="matkulNilai">
+          <option value="">- pilih -</option>
+          <option value="4">A (4)</option>
+          <option value="3.5">AB (3.5)</option>
+          <option value="3">B (3)</option>
+          <option value="2.5">BC (2.5)</option>
+          <option value="2">C (2)</option>
+          <option value="1">D (1)</option>
+          <option value="0">E (0)</option>
+          <option value="custom">Bobot custom...</option>
+        </select>
+      </div>
+      <div class="field" id="customBobotField" style="display:none;">
+        <label for="matkulNilaiCustom">Bobot custom</label>
+        <input type="number" id="matkulNilaiCustom" step="0.01" min="0" max="4">
+      </div>
+      <button class="btn-primary" id="addBtn">+ Tambah</button>
+    </div>
+
+    <table id="matkulTable">
+      <thead>
+        <tr>
+          <th>Mata Kuliah</th>
+          <th>SKS</th>
+          <th>Bobot</th>
+          <th class="num">Mutu</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="matkulBody"></tbody>
+    </table>
+    <p class="empty-note" id="emptyNote">Belum ada mata kuliah baru ditambahkan.</p>
+  </div>
+
+  <div class="card">
+    <h2>Hasil Perhitungan</h2>
+    <div class="result-grid">
+      <div class="result-box">
+        <div class="label">Total SKS Semester Ini</div>
+        <div class="value" id="sksBaruTotal">0</div>
+      </div>
+      <div class="result-box highlight-2">
+        <div class="label">IPS Semester Ini</div>
+        <div class="value" id="ipsSemester">0.000</div>
+      </div>
+      <div class="result-box highlight">
+        <div class="label">IPK Kumulatif</div>
+        <div class="value" id="ipkKumulatif">0.000</div>
+      </div>
+    </div>
+    <div class="result-grid" style="margin-top:12px;">
+      <div class="result-box">
+        <div class="label">Total SKS Kumulatif</div>
+        <div class="value" id="sksKumulatif">0</div>
+      </div>
+    </div>
+    <p class="hint">
+      IPS = Σ(SKS semester ini × Bobot) / Σ(SKS semester ini)<br>
+      IPK Kumulatif = (IPK lama × SKS lama + Σ(SKS baru × Bobot)) / (SKS lama + SKS baru)
+    </p>
+  </div>
+</div>
+
+<script src="assets/script.js"></script>
+</body>
+</html>
